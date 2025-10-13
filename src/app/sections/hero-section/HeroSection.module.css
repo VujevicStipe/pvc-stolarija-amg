@@ -1,0 +1,87 @@
+.heroSection {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    max-width: 1280px;
+    min-width: 270px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.heroContent {
+    width: 45%;
+    max-width: 430px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.logoImg {
+    width: 100%;
+    height: 100%;
+}
+
+/* .heroTitle {
+
+} */
+
+.heroGallery {
+    width: 46%;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    position: relative;
+}
+
+.heroImgWrapper {
+    width: 50%;
+    height: auto;
+    position: relative;
+    border-radius: 20px;
+}
+
+.heroImgWrapper:first-child {
+    transform: translateY(36px);
+}
+
+.heroImg {
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+}
+
+.heroSection.mobile {
+    max-width: 460px;
+    padding: 5rem 1.8rem;
+    flex-direction: column;
+    justify-content: center;
+    gap: 40px;
+}
+
+.heroSection.mobile .heroContent {
+    width: 100%;
+    margin-top: 36px;
+}
+
+.heroSection.mobile .heroGallery {
+    width: 100%;
+}
+
+.heroSection.tablet {
+    justify-content: center;
+    flex-direction: column;
+    gap: 30px;
+    padding: 6rem 3rem;
+}
+
+.heroSection.tablet .heroContent {
+    width: 100%;
+}
+
+.heroSection.tablet .heroGallery {
+    width: 100%;
+}
