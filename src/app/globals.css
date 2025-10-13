@@ -18,11 +18,15 @@ body {
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
   font-family: var(--font-montserrat), sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+}
+
+header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
 }
 
 * {
@@ -40,8 +44,11 @@ li {
   list-style-type: none;
 }
 
-/* @media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-} */
+h1 {
+  font-size: 1.3rem;
+  font-weight: 400;
+}
+
+.margin-top {
+  margin-top: 20px;
+}
