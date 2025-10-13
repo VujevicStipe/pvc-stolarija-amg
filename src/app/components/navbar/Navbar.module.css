@@ -2,7 +2,7 @@
     width: 100%;
     max-width: 1280px;
     margin: 0 auto;
-    height: fit-content;
+    /* height: fit-content; */
     padding: 10px 40px 10px 40px;
     display: flex;
     flex-direction: row;
@@ -31,12 +31,14 @@
 }
 
 .navbarMobile {
-  width: 100%;
-  padding: 10px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-sizing: border-box;
+    width: 100%;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    background-color: white;
+    border-bottom: 3px solid var(--green); 
 }
 
 .mobileNavHeader {
