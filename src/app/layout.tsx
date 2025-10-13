@@ -17,7 +17,9 @@ export default function RootLayout({
   return (
     <html lang="hr" className={montserrat.variable}>
       <body>
-        <Navbar />
+        <header>
+          <Navbar />
+        </header>
         {children}
         <Footer />
       </body>
