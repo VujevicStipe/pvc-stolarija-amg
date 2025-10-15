@@ -25,14 +25,15 @@ const HeroSection = () => {
         </h1>
         <Button
           variant="contained"
+          className="btn-animate"
           sx={{
             mt: "46px",
-            backgroundColor: "var(--green)",
-            "&:hover": { backgroundColor: "#0a7a42" },
+            background: "var(--radial-green-gradient)",
             fontSize: "1rem",
             fontWeight: 600,
             textTransform: "none",
             padding: "10px 2.5rem",
+            color: "#fff",
           }}
         >
           Pošalji upit
