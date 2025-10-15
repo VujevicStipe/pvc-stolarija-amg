@@ -54,9 +54,7 @@ export default function Navbar() {
           }}
         >
           <div className={styles.mobileNavHeader}>
-            <h2 className={styles.menuTitle}>
-              Menu
-            </h2>
+            <h2 className={styles.menuTitle}>Menu</h2>
 
             <IconButton
               onClick={() => setMenuOpen(false)}
@@ -105,16 +103,16 @@ export default function Navbar() {
         />
       </div>
       <ul className={styles.navItems}>
-        <li className={styles.navItem}>
+        <li className={`${styles.navItem} btn-animate`}>
           <a href="">O nama</a>
         </li>
-        <li className={styles.navItem}>
+        <li className={`${styles.navItem} btn-animate`}>
           <a href="">Ponuda</a>
         </li>
-        <li className={styles.navItem}>
+        <li className={`${styles.navItem} btn-animate`}>
           <a href="">Galerija</a>
         </li>
-        <li className={styles.navItem}>
+        <li className={`${styles.navItem} btn-animate`}>
           <a href="">Kontakt</a>
         </li>
       </ul>
