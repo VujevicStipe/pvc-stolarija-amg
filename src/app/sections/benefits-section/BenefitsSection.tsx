@@ -9,7 +9,7 @@ import StarIcon from "@mui/icons-material/Star";
 const BenefitsSection = () => {
   const txt1 = "Lorem ipsum dolor sit amet, consec";
   return (
-    <div className={styles.benefitsSection}>
+    <div className={`${styles.benefitsSection} section`}>
       <h2 className={styles.benefitsTitle}>Zašto baš AMG?</h2>
       <BenefitCard
         icon={<EmojiEventsIcon sx={{ fontSize: 48, color: "var(--green)" }} />}
