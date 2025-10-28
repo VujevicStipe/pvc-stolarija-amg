@@ -1,0 +1,73 @@
+.aboutSection {
+    flex-wrap: wrap;
+    gap: 16px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    margin-top: 5.4rem;
+}
+
+.aboutUsTitle {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 3.4rem;
+}
+
+.aboutUsTitle::after {
+    content: "O nama";
+    display: inline-block;
+    margin-top: 0.5rem;
+    padding: 0.08rem 0.65rem;
+    border: 1px solid var(--green);
+    border-radius: 9999px;
+    color: var(--green);
+    font-size: 0.9rem;
+    font-weight: 300;
+    letter-spacing: 1px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -2rem;
+    background: white;
+}
+
+.googleMapsLocation {
+    width: 48%;
+}
+
+.aboutUsContent {
+    width: 48%;
+    min-width: 260px;
+    text-align: start;
+}
+
+.contentTitle {
+    margin: 0 0 2rem 0;
+    font-size: 0.9rem;
+    font-weight: 100;
+}
+
+.location {
+    font-size: 1rem;
+    font-weight: 100;
+    margin: 4rem 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.aboutSection.mobile,
+.aboutSection.tablet {
+    padding: 0 20px;
+}
+
+.aboutSection.mobile .googleMapsLocation {
+    width: 100%;
+    margin-bottom: 1.2rem;
+}
+
+.aboutSection.mobile .aboutUsContent {
+    width: 100%;
+}
