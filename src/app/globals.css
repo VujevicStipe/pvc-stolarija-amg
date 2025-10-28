@@ -51,6 +51,19 @@ h1 {
   font-weight: 400;
 }
 
+p {
+  font-size: 1.1rem;
+  font-weight: 300;
+}
+
+.section {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  position: relative;
+  display: flex;
+}
+
 .margin-top {
   margin-top: 20px;
 }
