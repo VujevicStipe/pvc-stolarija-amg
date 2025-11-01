@@ -1,0 +1,64 @@
+[
+    {
+        "id": 1,
+        "title": "Ulazna vrata",
+        "tag": "Ponuda",
+        "bullets": [
+            "Lorem ipsum dolor",
+            "Lorem ipsum",
+            "Lorem dolor ipsum",
+            "Lorem ipsum dolor"
+        ],
+        "src": "/images/door1.jpg",
+        "alt": "White door"
+    },
+    {
+        "id": 2,
+        "title": "Prozori",
+        "tag": "Ponuda",
+        "bullets": [
+            "Double glazed",
+            "Energy efficient",
+            "Custom sizes"
+        ],
+        "src": "/images/window1.jpg",
+        "alt": "Window"
+    },
+    {
+        "id": 3,
+        "title": "Roletne",
+        "tag": "Ponuda",
+        "bullets": [
+            "Motorized",
+            "Remote control"
+        ],
+        "src": "/images/shutter1.jpg",
+        "alt": "Shutter"
+    },
+    {
+        "id": 4,
+        "title": "Ulazna vrata2",
+        "tag": "Ponuda",
+        "bullets": [
+            "Lorem ipsum dolor",
+            "Lorem ipsum",
+            "Lorem dolor ipsum",
+            "Lorem ipsum dolor"
+        ],
+        "src": "/images/door2.jpg",
+        "alt": "White door"
+    },
+    {
+        "id": 5,
+        "title": "Ulazna vrata3",
+        "tag": "Ponuda",
+        "bullets": [
+            "Lorem ipsum dolor",
+            "Lorem ipsum",
+            "Lorem dolor ipsum",
+            "Lorem ipsum dolor"
+        ],
+        "src": "/images/door3.jpg",
+        "alt": "White door"
+    }
+]
