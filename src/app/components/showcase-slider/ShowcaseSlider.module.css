@@ -1,200 +1,324 @@
-/* outer container centers content and limits to 1280px */
+/* Container */
 .container {
-  display: flex;
-  justify-content: center;
-  padding: 24px 12px; /* small page padding */
-  overflow: visible;
-}
-
-/* inner fixed-width layout */
-.inner {
   width: 100%;
-  max-width: 1280px; /* <= requested */
-  display: flex;
-  gap: 32px;
-  align-items: stretch;
-  overflow: visible;
+  max-width: 1280px;
+  margin: 0 auto;
+  /* padding: 60px 20px;
+  background-color: #f5f5f5; */
+  margin-top: 7rem;
 }
 
-/* left green panel */
-.leftPanel {
-  flex: 0 0 46%;
-  min-height: 360px;
-  padding: 40px;
-  background: linear-gradient(135deg, #0ea75f 0%, #0aa05a 100%);
-  color: #fff;
-  border-radius: 24px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+/* Zeleni kontejner */
+.greenSection {
+  background-color: #0d9f5a;
+  border-radius: 30px;
+  overflow: visible;
   position: relative;
-  z-index: 3; /* keep above default slider layers but below active slide when needed */
+  min-height: 500px;
+  width: 55%;
+  margin: 0;
+  margin-left: 0;
+}
+
+.contentWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 60px 0 60px 60px;
+  gap: 40px;
+}
+
+/* Lijevi dio - Tekst sekcija */
+.textSection {
+  flex: 0 0 350px;
+  color: white;
+  z-index: 5;
 }
 
 .title {
-  font-size: 28px;
-  margin: 0 0 8px 0;
+  font-size: 2.5rem;
   font-weight: 700;
-}
-
-.tag {
-  display: inline-block;
-  background: rgba(255, 255, 255, 0.08);
-  color: #e6fff0;
-  padding: 6px 10px;
-  border-radius: 14px;
-  font-size: 12px;
-  margin-bottom: 20px;
-}
-
-.bullets {
-  margin-top: 18px;
-  padding-left: 18px;
-  color: rgba(255, 255, 255, 0.95);
-}
-
-/* controls */
-.controls {
-  margin-top: 32px;
-  display: flex;
-  gap: 12px;
-}
-
-.btn {
-  width: 44px;
-  height: 28px;
-  border-radius: 16px;
-  border: none;
-  background: rgba(0, 0, 0, 0.7);
+  margin: 0 0 8px 0;
   color: white;
+  line-height: 1.2;
+}
+
+.subtitle {
+  display: inline-block;
+  padding: 0.08rem 0.65rem;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 9999px;
+  margin-bottom: 30px;
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 300;
+  letter-spacing: 1px;
+  text-transform: capitalize;
+  background: transparent;
+}
+
+.featureList {
+  list-style: none;
+  padding: 0;
+  margin: 30px 0;
+}
+
+.featureItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.95rem;
+  margin-bottom: 12px;
+  opacity: 0.95;
+}
+
+.checkIcon {
+  flex-shrink: 0;
+}
+
+/* Navigation buttons */
+.navButtons {
+  display: flex;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+.navButton {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.8);
+  border: none;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  font-size: 14px;
+  transition: all 0.3s ease;
 }
 
-/* slider area */
-.sliderArea {
-  flex: 0 0 54%;
-  overflow: visible;
+.navButton:hover {
+  background-color: rgba(0, 0, 0, 0.95);
+  transform: scale(1.05);
 }
 
-/* Ensure keen has room and doesn't clip transforms */
-.keen {
-  position: relative;
-  display: block;
-  padding: 20px 0;
-  overflow: visible; /* allow cards to overlap leftPanel */
-  isolation: isolate; /* ensure stacking context for transforms */
-}
-
-/* base slide wrapper */
-.slide {
-  text-align: center;
-  transition: transform 360ms cubic-bezier(.22,.9,.35,1), opacity 360ms ease;
-  will-change: transform, opacity;
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
-  z-index: 2; /* base stacking */
-}
-
-/* card */
-.card {
-  width: 260px;
-  height: 340px;
-  margin: 0 auto;
-  border-radius: 18px;
-  overflow: hidden;
-  background: #fff;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14);
-  transition: transform 360ms cubic-bezier(.22,.9,.35,1), opacity 360ms ease, box-shadow 360ms ease;
-  position: relative;
-  z-index: 4; /* default above slider base but below leftPanel z-index 3? keep consistent below */
-  will-change: transform, opacity;
-}
-
-/* tweak stacking so active and left-of-active appear above leftPanel (which is z-index:3) */
-/* active (center) */
-.active {
-  z-index: 20; /* ensure wrapper itself is high */
-}
-.active .card {
-  transform: scale(1.08);
-  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.32);
-  z-index: 22; /* topmost */
-}
-
-/* slides left of active should slightly overlap and have bigger z-index so they appear ABOVE the green panel */
-.leftOfActive {
-  z-index: 18;
-}
-.leftOfActive .card {
-  transform: translateX(-24px) scale(1.04);
-  z-index: 19;
-}
-
-/* slides to the right: smaller, below center */
-.rightOfActive {
-  z-index: 8;
-}
-.rightOfActive .card {
+.navButton:active {
   transform: scale(0.95);
-  z-index: 9;
-  filter: saturate(0.98);
 }
 
-/* leaving animations: keep them above default but below the active if necessary */
-.leavingLeft {
-  z-index: 17;
-}
-.leavingLeft .card {
-  transform: translateX(-80px) scale(0.98);
-  opacity: 0;
-  z-index: 17;
-}
-
-.leavingRight {
-  z-index: 17;
-}
-.leavingRight .card {
-  transform: translateX(80px) scale(0.98);
-  opacity: 0;
-  z-index: 17;
+/* Desni dio - Slider sekcija */
+.sliderSection {
+  flex: 1;
+  position: relative;
+  height: 500px;
+  overflow: visible;
+  padding-right: 0;
+  margin-right: 0;
 }
 
-/* make sure image inside card covers */
-.card :global(img) {
-  display: block;
+.sliderWrapper {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 0;
+}
+
+/* Slide kartice */
+.slide {
+  position: absolute;
+  width: 250px;
+  height: 350px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.slide:hover {
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4);
+}
+
+.slideActive {
+  cursor: default;
+}
+
+.slideLeft {
+  visibility: hidden;
+}
+
+.slideImage {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  user-select: none;
+  pointer-events: none;
 }
 
-/* responsive tweaks */
+/* Responsive - Tablet */
 @media (max-width: 1024px) {
-  .inner {
-    gap: 18px;
+  .greenSection {
+    width: 100%;
+    min-height: 850px;
+    display: flex;
+    flex-direction: column;
   }
-  .leftPanel {
-    flex-basis: 50%;
-    padding: 28px;
+
+  .contentWrapper {
+    flex-direction: column;
+    padding: 50px 30px 0 30px;
+    gap: 0;
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
   }
-  .sliderArea {
-    flex-basis: 50%;
+
+  .textSection {
+    flex: none;
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    order: 1;
+    margin: 0 auto;
   }
-  .card {
-    width: 220px;
-    height: 300px;
+
+  .title {
+    font-size: 2.2rem;
+  }
+
+  .featureList {
+    margin: 25px auto;
+    max-width: 400px;
+  }
+
+  .featureItem {
+    justify-content: center;
+  }
+
+  .navButtons {
+    justify-content: center;
+    margin-bottom: 40px;
+  }
+
+  .sliderSection {
+    width: 100%;
+    height: 400px;
+    order: 2;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 20px;
+  }
+
+  .sliderWrapper {
+    justify-content: center;
+    align-items: flex-end;
+    width: 100%;
+  }
+
+  .slide {
+    width: 280px;
+    height: 350px;
   }
 }
 
-@media (max-width: 640px) {
-  .inner {
-    flex-direction: column;
-    gap: 18px;
+/* Responsive - Mobile */
+@media (max-width: 768px) {
+  .container {
+    padding: 30px 15px;
   }
-  .leftPanel, .sliderArea {
-    flex-basis: auto;
+
+  .greenSection {
+    border-radius: 20px;
+    min-height: 750px;
   }
-  .card {
-    width: 100%;
-    max-width: 360px;
+
+  .contentWrapper {
+    padding: 40px 25px 0 25px;
+  }
+
+  .textSection {
+    max-width: 100%;
+    order: 1;
+  }
+
+  .title {
+    font-size: 1.8rem;
+  }
+
+  .featureList {
+    max-width: 320px;
+  }
+
+  .featureItem {
+    font-size: 0.9rem;
+  }
+
+  .navButtons {
+    margin-bottom: 35px;
+  }
+
+  .sliderSection {
+    height: 380px;
+    order: 2;
+    padding-bottom: 15px;
+  }
+
+  .slide {
+    width: 220px;
+    height: 310px;
+  }
+}
+
+/* Responsive - Small Mobile */
+@media (max-width: 480px) {
+  .greenSection {
+    min-height: 680px;
+  }
+
+  .contentWrapper {
+    padding: 30px 20px 0 20px;
+  }
+
+  .textSection {
+    order: 1;
+  }
+
+  .title {
+    font-size: 1.6rem;
+  }
+
+  .subtitle {
+    font-size: 0.7rem;
+  }
+
+  .featureList {
+    max-width: 280px;
+  }
+
+  .featureItem {
+    font-size: 0.85rem;
+    margin-bottom: 10px;
+  }
+
+  .navButtons {
+    margin-bottom: 30px;
+  }
+
+  .sliderSection {
+    height: 340px;
+    order: 2;
+    padding-bottom: 10px;
+  }
+
+  .slide {
+    width: 190px;
     height: 280px;
+  }
+
+  .navButton {
+    width: 40px;
+    height: 40px;
   }
 }

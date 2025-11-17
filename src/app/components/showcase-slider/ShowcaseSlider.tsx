@@ -1,132 +1,196 @@
-"use client";
+'use client'
 
-import React, { useEffect, useRef, useState } from "react";
-import Image from "next/image";
-import { useKeenSlider } from "keen-slider/react";
-import type { KeenSliderInstance } from "keen-slider";
-import "keen-slider/keen-slider.min.css";
-import { Slide } from "../../types/slide";
-import styles from "./ShowcaseSlider.module.css";
+import React, { useRef, useState } from 'react';
+import { ChevronLeft, ChevronRight, Check } from 'lucide-react';
+import styles from './ShowcaseSlider.module.css';
 
-type Props = {
-  slides: Slide[];
-};
+interface SlideData {
+  id: number;
+  title: string;
+  subtitle: string;
+  image: string;
+  features: string[];
+}
 
-export default function ShowcaseSlider({ slides }: Props) {
-  const [current, setCurrent] = useState<number>(0);
-  const prevRef = useRef<number | null>(null);
-  const [leaving, setLeaving] = useState<{
-    idx: number;
-    dir: "left" | "right";
-  } | null>(null);
+const slidesData: SlideData[] = [
+  {
+    id: 1,
+    title: 'Ulazna vrata',
+    subtitle: 'Ponuda',
+    image: 'https://images.unsplash.com/photo-1563298723-dcfebaa392e3?w=600&h=700&fit=crop',
+    features: ['Premium kvaliteta', 'Toplinska izolacija', 'Sigurnosna brava', 'Moderna estetika']
+  },
+  {
+    id: 2,
+    title: 'PVC Prozori',
+    subtitle: 'Ponuda',
+    image: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?w=600&h=700&fit=crop',
+    features: ['Energetska učinkovitost', 'Zvučna izolacija', 'Lako održavanje']
+  },
+  {
+    id: 3,
+    title: 'Komarnici',
+    subtitle: 'Ponuda',
+    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&h=700&fit=crop',
+    features: ['Jednostavna montaža', 'Različiti modeli', 'Dugotrajnost']
+  },
+  {
+    id: 4,
+    title: 'Balkonska vrata',
+    subtitle: 'Ponuda',
+    image: 'https://images.unsplash.com/photo-1484154218962-a197022b5858?w=600&h=700&fit=crop',
+    features: ['Veliki izbor dizajna', 'Otporna na vremenske uvjete', 'Elegantni profili', 'UV zaštita']
+  }
+];
 
-  const MAX_PER_VIEW = 3;
-  const perView = (() => {
-    if (slides.length <= 1) return 1;
-    return Math.min(MAX_PER_VIEW, Math.max(1, slides.length - 1));
-  })();
+const ShowCaseSlider = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
+  const autoPlayRef = useRef<NodeJS.Timeout | null>(null);
 
-  const [sliderRef, slider] = useKeenSlider<HTMLDivElement>({
-    loop: true,
-    slides: { perView, spacing: 24 },
-    breakpoints: {
-      "(max-width: 1024px)": {
-        slides: { perView: Math.min(2, perView), spacing: 16 },
-      },
-      "(max-width: 640px)": { slides: { perView: 1, spacing: 12 } },
-    },
-    created(s: KeenSliderInstance) {
-      setCurrent(s.track.details.rel ?? 0);
-    },
-    slideChanged(s: any) {
-      const idx = s?.track?.details?.rel ?? s?.details?.relative ?? 0;
-      const prev = prevRef.current ?? current;
-      const dir = idx > prev ? "right" : idx < prev ? "left" : null;
-      if (dir && prev !== idx) {
-        setLeaving({ idx: prev, dir: dir === "right" ? "right" : "left" });
-        window.setTimeout(() => setLeaving(null), 420);
-      }
-      prevRef.current = idx;
-      setCurrent(idx);
-    },
-  } as any);
+  // Detektiramo mobile/tablet
+  React.useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 1024);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
-  useEffect(() => {
-    // optional debug, remove in production
-    // console.log("perView", perView, "slides", slides.length);
-  }, [perView, slides.length]);
-
-  const goPrev = () => {
-    (
-      slider as React.MutableRefObject<KeenSliderInstance | null>
-    )?.current?.prev?.();
-  };
-  const goNext = () => {
-    (
-      slider as React.MutableRefObject<KeenSliderInstance | null>
-    )?.current?.next?.();
-  };
-
-  const getStateClass = (i: number) => {
-    if (leaving && leaving.idx === i) {
-      return leaving.dir === "left" ? styles.leavingLeft : styles.leavingRight;
+  React.useEffect(() => {
+    if (isAutoPlaying) {
+      autoPlayRef.current = setInterval(() => {
+        handleNext();
+      }, 4000);
     }
-    if (i === current) return styles.active;
-    if (i < current) return styles.leftOfActive;
-    return styles.rightOfActive;
+    return () => {
+      if (autoPlayRef.current) clearInterval(autoPlayRef.current);
+    };
+  }, [activeIndex, isAutoPlaying]);
+
+  const handlePrev = () => {
+    setActiveIndex((prev) => (prev === 0 ? slidesData.length - 1 : prev - 1));
+    resetAutoPlay();
   };
+
+  const handleNext = () => {
+    setActiveIndex((prev) => (prev === slidesData.length - 1 ? 0 : prev + 1));
+    resetAutoPlay();
+  };
+
+  const resetAutoPlay = () => {
+    if (autoPlayRef.current) clearInterval(autoPlayRef.current);
+    setIsAutoPlaying(true);
+  };
+
+  const getSlidePosition = (index: number) => {
+    const total = slidesData.length;
+    let diff = index - activeIndex;
+    
+    // Normaliziramo razliku da bude u rasponu [-total/2, total/2]
+    if (diff > total / 2) {
+      diff -= total;
+    } else if (diff < -total / 2) {
+      diff += total;
+    }
+    
+    return diff;
+  };
+
+  // Dupliciramo slides da bi infinity loop radio bolje
+  const getVisibleSlides = () => {
+    const total = slidesData.length;
+    const slides = [];
+    
+    // Prikazujemo: 1 lijevo (za animaciju) + aktivni + 2 desno
+    for (let i = -1; i <= 2; i++) {
+      const index = (activeIndex + i + total) % total;
+      slides.push({
+        ...slidesData[index],
+        position: i,
+        originalIndex: index
+      });
+    }
+    
+    return slides;
+  };
+
+  const visibleSlides = getVisibleSlides();
 
   return (
-    <section className={styles.container} aria-label="Showcase">
-      <div className={styles.inner}>
-        <div className={styles.leftPanel}>
-          <h2 className={styles.title}>{slides[current]?.title}</h2>
-          {slides[current]?.tag && (
-            <div className={styles.tag}>{slides[current].tag}</div>
-          )}
-          <ul className={styles.bullets}>
-            {(slides[current]?.bullets || []).map((b, i) => (
-              <li key={i}>{b}</li>
-            ))}
-          </ul>
+    <div className={styles.container}>
+      <div className={styles.greenSection}>
+        <div className={styles.contentWrapper}>
+          {/* Lijevi dio s tekstom */}
+          <div className={styles.textSection}>
+            <h2 className={styles.title}>{slidesData[activeIndex].title}</h2>
+            <span className={styles.subtitle}>{slidesData[activeIndex].subtitle}</span>
+            
+            <ul className={styles.featureList}>
+              {slidesData[activeIndex].features.map((feature, idx) => (
+                <li key={idx} className={styles.featureItem}>
+                  <Check size={16} className={styles.checkIcon} />
+                  {feature}
+                </li>
+              ))}
+            </ul>
 
-          <div className={styles.controls}>
-            <button
-              className={styles.btn}
-              onClick={goPrev}
-              aria-label="Previous"
-            >
-              ←
-            </button>
-            <button className={styles.btn} onClick={goNext} aria-label="Next">
-              →
-            </button>
+            <div className={styles.navButtons}>
+              <button 
+                onClick={handlePrev} 
+                className={styles.navButton} 
+                aria-label="Previous"
+              >
+                <ChevronLeft size={20} />
+              </button>
+              <button 
+                onClick={handleNext} 
+                className={styles.navButton} 
+                aria-label="Next"
+              >
+                <ChevronRight size={20} />
+              </button>
+            </div>
           </div>
-        </div>
 
-        <div className={styles.sliderArea}>
-          <div ref={sliderRef} className={`keen-slider ${styles.keen}`}>
-            {slides.map((s, i) => {
-              const stateClass = getStateClass(i);
-              return (
-                <div
-                  key={s.id}
-                  className={`keen-slider__slide ${styles.slide} ${stateClass}`}
-                >
-                  <div className={styles.card}>
-                    <Image
-                      src={s.src}
-                      alt={s.alt ?? s.title}
-                      width={420}
-                      height={300}
+          <div className={styles.sliderSection}>
+            <div className={styles.sliderWrapper}>
+              {visibleSlides.map((slide) => {
+                const isActive = slide.position === 0;
+                const isLeft = slide.position < 0;
+                const isVisible = slide.position >= 0 && slide.position <= 2;
+
+                return (
+                  <div
+                    key={slide.id}
+                    className={`${styles.slide} ${isActive ? styles.slideActive : ''} ${isLeft ? styles.slideLeft : ''}`}
+                    style={{
+                      transform: `translateX(${slide.position * 280}px) scale(${isActive ? 1.3 : 1})`,
+                      zIndex: isActive ? 10 : isLeft ? -1 : 8 - slide.position,
+                      opacity: isVisible ? 1 : 0,
+                      pointerEvents: isVisible ? 'auto' : 'none',
+                      visibility: isVisible ? 'visible' : 'hidden',
+                    }}
+                    onClick={() => !isActive && isVisible && setActiveIndex(slide.originalIndex)}
+                  >
+                    <img 
+                      src={slide.image} 
+                      alt={slide.title} 
+                      className={styles.slideImage} 
                     />
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
-}
+};
+
+export default ShowCaseSlider;
