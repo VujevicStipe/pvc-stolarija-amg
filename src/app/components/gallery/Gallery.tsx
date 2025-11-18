@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import styles from './Gallery.module.css';
 
@@ -8,7 +8,7 @@ interface GalleryImage {
   id: number;
   src: string;
   alt: string;
-  gridArea: string; 
+  gridArea: string;
 }
 
 const galleryImages: GalleryImage[] = [
@@ -44,25 +44,25 @@ const galleryImages: GalleryImage[] = [
   },
   {
     id: 6,
-    src: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=600&h=600&fit=crop', // Tvoja slika 6
+    src: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=600&h=600&fit=crop',
     alt: 'PVC vrata i prozori 6',
     gridArea: 'img6'
   },
   {
     id: 7,
-    src: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop', // Tvoja slika 7
+    src: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop',
     alt: 'PVC vrata i prozori 7',
     gridArea: 'img7'
   },
   {
     id: 8,
-    src: 'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=600&h=600&fit=crop', // Tvoja slika 8
+    src: 'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=600&h=600&fit=crop',
     alt: 'PVC vrata i prozori 8',
     gridArea: 'img8'
   },
   {
     id: 9,
-    src: 'https://images.unsplash.com/photo-1484154218962-a197022b5858?w=600&h=800&fit=crop', // Tvoja slika 9
+    src: 'https://images.unsplash.com/photo-1484154218962-a197022b5858?w=600&h=800&fit=crop',
     alt: 'PVC vrata i prozori 9',
     gridArea: 'img9'
   }
@@ -72,9 +72,12 @@ const Gallery = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+  const [isClient, setIsClient] = useState(false); // Novi state za hydration fix
 
-  // Detektiraj mobile
-  React.useEffect(() => {
+  // Fix za Next.js hydration - prvo čekamo da se client-side kod pokrene
+  useEffect(() => {
+    setIsClient(true);
+    
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 768);
     };
@@ -85,9 +88,12 @@ const Gallery = () => {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // Broj slika za prikaz na mobile (samo u grid-u, ne u modalu!)
   const mobileImageCount = 2;
-  const displayImages = isMobile ? galleryImages.slice(0, mobileImageCount) : galleryImages;
+  
+  // Prikaži sve slike dok se ne učita client-side kod
+  const displayImages = (isClient && isMobile) 
+    ? galleryImages.slice(0, mobileImageCount) 
+    : galleryImages;
 
   const openModal = (index: number) => {
     setCurrentImageIndex(index);
@@ -113,10 +119,10 @@ const Gallery = () => {
   };
 
   // Keyboard navigation
-  React.useEffect(() => {
+  useEffect(() => {
+    if (!isModalOpen) return;
+    
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (!isModalOpen) return;
-      
       if (e.key === 'Escape') closeModal();
       if (e.key === 'ArrowLeft') goToPrevious();
       if (e.key === 'ArrowRight') goToNext();
@@ -140,7 +146,7 @@ const Gallery = () => {
           </button>
         </div>
 
-        {/* Grid Gallery - prikazuje samo displayImages */}
+        {/* Grid Gallery */}
         <div className={styles.gallery}>
           {displayImages.map((image, index) => (
             <div
@@ -162,7 +168,7 @@ const Gallery = () => {
         </div>
 
         {/* Show More Button - Samo na mobile */}
-        {isMobile && galleryImages.length > mobileImageCount && (
+        {isClient && isMobile && galleryImages.length > mobileImageCount && (
           <div className={styles.showMoreContainer}>
             <button 
               className={styles.showMoreButton}
@@ -174,7 +180,7 @@ const Gallery = () => {
         )}
       </div>
 
-      {/* Lightbox Modal - UVIJEK koristi cijeli galleryImages array */}
+      {/* Lightbox Modal */}
       {isModalOpen && (
         <div className={styles.modal} onClick={closeModal}>
           <button 
