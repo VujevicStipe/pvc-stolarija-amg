@@ -73,13 +73,10 @@ const Gallery = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   
-  // Koristi tvoj postojeći hook umjesto vlastitog useState
   const deviceType = useDeviceType();
   const isMobile = deviceType === 'mobile';
 
   const mobileImageCount = 2;
-  
-  // Prikaži sve slike na desktop/tablet, samo 2 na mobile
   const displayImages = isMobile 
     ? galleryImages.slice(0, mobileImageCount) 
     : galleryImages;
@@ -87,12 +84,19 @@ const Gallery = () => {
   const openModal = (index: number) => {
     setCurrentImageIndex(index);
     setIsModalOpen(true);
+    
+    // POPRAVLJENO: Spriječi layout shift
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
     document.body.style.overflow = 'hidden';
+    document.body.style.paddingRight = `${scrollbarWidth}px`;
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
-    document.body.style.overflow = 'unset';
+    
+    // POPRAVLJENO: Vrati sve na normalno
+    document.body.style.overflow = '';
+    document.body.style.paddingRight = '';
   };
 
   const goToPrevious = () => {
@@ -120,6 +124,14 @@ const Gallery = () => {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isModalOpen]);
+
+  // Cleanup kada se komponenta unmountuje
+  useEffect(() => {
+    return () => {
+      document.body.style.overflow = '';
+      document.body.style.paddingRight = '';
+    };
+  }, []);
 
   return (
     <section className={styles.gallerySection}>
