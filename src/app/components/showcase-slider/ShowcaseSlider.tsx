@@ -3,6 +3,7 @@
 import React, { useRef, useState } from 'react';
 import { ChevronLeft, ChevronRight, Check } from 'lucide-react';
 import styles from './ShowcaseSlider.module.css';
+import useDeviceType from '@/app/hooks/useWindowSize';
 
 interface SlideData {
   id: number;
@@ -46,20 +47,10 @@ const slidesData: SlideData[] = [
 const ShowCaseSlider = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-  const [isMobile, setIsMobile] = useState(false);
   const autoPlayRef = useRef<NodeJS.Timeout | null>(null);
-
-  // Detektiramo mobile/tablet
-  React.useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 1024);
-    };
-    
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
+  
+  const deviceType = useDeviceType();
+  const isMobile = deviceType === 'mobile';
 
   React.useEffect(() => {
     if (isAutoPlaying) {
@@ -87,26 +78,10 @@ const ShowCaseSlider = () => {
     setIsAutoPlaying(true);
   };
 
-  const getSlidePosition = (index: number) => {
-    const total = slidesData.length;
-    let diff = index - activeIndex;
-    
-    // Normaliziramo razliku da bude u rasponu [-total/2, total/2]
-    if (diff > total / 2) {
-      diff -= total;
-    } else if (diff < -total / 2) {
-      diff += total;
-    }
-    
-    return diff;
-  };
-
-  // Dupliciramo slides da bi infinity loop radio bolje
   const getVisibleSlides = () => {
     const total = slidesData.length;
     const slides = [];
     
-    // Prikazujemo: 1 lijevo (za animaciju) + aktivni + 2 desno
     for (let i = -1; i <= 2; i++) {
       const index = (activeIndex + i + total) % total;
       slides.push({
@@ -125,7 +100,6 @@ const ShowCaseSlider = () => {
     <div className={styles.container}>
       <div className={styles.greenSection}>
         <div className={styles.contentWrapper}>
-          {/* Lijevi dio s tekstom */}
           <div className={styles.textSection}>
             <h2 className={styles.title}>{slidesData[activeIndex].title}</h2>
             <span className={styles.subtitle}>{slidesData[activeIndex].subtitle}</span>
