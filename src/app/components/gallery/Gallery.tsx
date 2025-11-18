@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import styles from './Gallery.module.css';
+import useDeviceType from '@/app/hooks/useWindowSize';
 
 interface GalleryImage {
   id: number;
@@ -71,27 +72,15 @@ const galleryImages: GalleryImage[] = [
 const Gallery = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
-  const [isClient, setIsClient] = useState(false); // Novi state za hydration fix
-
-  // Fix za Next.js hydration - prvo čekamo da se client-side kod pokrene
-  useEffect(() => {
-    setIsClient(true);
-    
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-    
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
+  
+  // Koristi tvoj postojeći hook umjesto vlastitog useState
+  const deviceType = useDeviceType();
+  const isMobile = deviceType === 'mobile';
 
   const mobileImageCount = 2;
   
-  // Prikaži sve slike dok se ne učita client-side kod
-  const displayImages = (isClient && isMobile) 
+  // Prikaži sve slike na desktop/tablet, samo 2 na mobile
+  const displayImages = isMobile 
     ? galleryImages.slice(0, mobileImageCount) 
     : galleryImages;
 
@@ -168,7 +157,7 @@ const Gallery = () => {
         </div>
 
         {/* Show More Button - Samo na mobile */}
-        {isClient && isMobile && galleryImages.length > mobileImageCount && (
+        {isMobile && galleryImages.length > mobileImageCount && (
           <div className={styles.showMoreContainer}>
             <button 
               className={styles.showMoreButton}
