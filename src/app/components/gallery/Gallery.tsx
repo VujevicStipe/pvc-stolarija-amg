@@ -8,10 +8,9 @@ interface GalleryImage {
   id: number;
   src: string;
   alt: string;
-  gridArea: string; // Za desktop grid pozicioniranje
+  gridArea: string; 
 }
 
-// OVDJE STAVI SVOJE SLIKE - zamijeni src vrijednosti
 const galleryImages: GalleryImage[] = [
   {
     id: 1,
@@ -86,7 +85,7 @@ const Gallery = () => {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // Broj slika za prikaz na mobile
+  // Broj slika za prikaz na mobile (samo u grid-u, ne u modalu!)
   const mobileImageCount = 2;
   const displayImages = isMobile ? galleryImages.slice(0, mobileImageCount) : galleryImages;
 
@@ -141,7 +140,7 @@ const Gallery = () => {
           </button>
         </div>
 
-        {/* Grid Gallery */}
+        {/* Grid Gallery - prikazuje samo displayImages */}
         <div className={styles.gallery}>
           {displayImages.map((image, index) => (
             <div
@@ -175,7 +174,7 @@ const Gallery = () => {
         )}
       </div>
 
-      {/* Lightbox Modal */}
+      {/* Lightbox Modal - UVIJEK koristi cijeli galleryImages array */}
       {isModalOpen && (
         <div className={styles.modal} onClick={closeModal}>
           <button 
