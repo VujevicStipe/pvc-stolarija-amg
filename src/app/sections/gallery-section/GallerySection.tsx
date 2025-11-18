@@ -6,7 +6,7 @@ export default function GallerySection() {
 
   return (
     <section className={`${styles.gallery} section`}>
-      <Gallery />
+      {/* <Gallery /> */}
     </section>
   );
 }
