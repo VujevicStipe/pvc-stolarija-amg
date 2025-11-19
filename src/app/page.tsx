@@ -5,7 +5,6 @@ import BenefitsSection from "./sections/benefits-section/BenefitsSection";
 import AboutSection from "./sections/about-section/AboutSection";
 import ShowcaseSection from "./sections/showcase-section/ShowcaseSection";
 import GallerySection from "./sections/gallery-section/GallerySection";
-import Footer from './components/footer/Footer';
 
 export const metadata = buildMetadata({
   title: 'Proizvodnja i Montaža PVC Stolarije',
