@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useRef, useState } from 'react';
-import { ChevronLeft, ChevronRight, Check } from 'lucide-react';
+import { ChevronRight, Check } from 'lucide-react';
 import styles from './ShowcaseSlider.module.css';
 import useDeviceType from '@/app/hooks/useWindowSize';
 
@@ -63,11 +63,6 @@ const ShowCaseSlider = () => {
     };
   }, [activeIndex, isAutoPlaying]);
 
-  const handlePrev = () => {
-    setActiveIndex((prev) => (prev === 0 ? slidesData.length - 1 : prev - 1));
-    resetAutoPlay();
-  };
-
   const handleNext = () => {
     setActiveIndex((prev) => (prev === slidesData.length - 1 ? 0 : prev + 1));
     resetAutoPlay();
@@ -115,13 +110,6 @@ const ShowCaseSlider = () => {
 
             <div className={styles.navButtons}>
               <button 
-                onClick={handlePrev} 
-                className={styles.navButton} 
-                aria-label="Previous"
-              >
-                <ChevronLeft size={20} />
-              </button>
-              <button 
                 onClick={handleNext} 
                 className={styles.navButton} 
                 aria-label="Next"
@@ -138,12 +126,16 @@ const ShowCaseSlider = () => {
                 const isLeft = slide.position < 0;
                 const isVisible = slide.position >= 0 && slide.position <= 2;
 
+                const transformValue = isMobile 
+                  ? `translateX(${slide.position * 200}px) scale(${isActive ? 1.3 : 1})`
+                  : `translateX(${slide.position * 280}px) scale(${isActive ? 1.3 : 1})`;
+
                 return (
                   <div
                     key={slide.id}
                     className={`${styles.slide} ${isActive ? styles.slideActive : ''} ${isLeft ? styles.slideLeft : ''}`}
                     style={{
-                      transform: `translateX(${slide.position * 280}px) scale(${isActive ? 1.3 : 1})`,
+                      transform: transformValue,
                       zIndex: isActive ? 10 : isLeft ? -1 : 8 - slide.position,
                       opacity: isVisible ? 1 : 0,
                       pointerEvents: isVisible ? 'auto' : 'none',
