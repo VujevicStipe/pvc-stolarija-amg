@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Navbar.module.css";
 import Image from "next/image";
 import logo from "../../../../public/image 3.png";
@@ -8,7 +8,6 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import {
-  Box,
   Drawer,
   List,
   ListItem,
@@ -16,18 +15,49 @@ import {
   ListItemText,
 } from "@mui/material";
 
+const navItems = [
+  { label: "O nama", id: "about" },
+  { label: "Ponuda", id: "showcase" },
+  { label: "Galerija", id: "gallery" },
+  { label: "Kontakt", id: "contact" },
+];
+
 export default function Navbar() {
   const deviceType = useDeviceType();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
-  if (deviceType === "mobile") {
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const navbarHeight = 110;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+    }
+    setMenuOpen(false);
+  };
+
+  const isMobile = mounted && deviceType === "mobile";
+
+  if (isMobile) {
     return (
-      <div className={styles.navbarMobile}>
+      <nav className={styles.navbarMobile}>
         <div className={styles.logo}>
           <Image
             className={styles.logoImg}
             src={logo}
             alt="amg-pvc-stolarija-logo-obrt-za-proizvodnju"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            style={{ cursor: 'pointer' }}
           />
         </div>
         <IconButton onClick={() => setMenuOpen(!menuOpen)} color="inherit">
@@ -68,11 +98,11 @@ export default function Navbar() {
           </div>
 
           <List sx={{ width: "100%" }}>
-            {["O nama", "Ponuda", "Galerija", "Kontakt"].map((text) => (
-              <ListItem key={text} disablePadding>
-                <ListItemButton onClick={() => setMenuOpen(false)}>
+            {navItems.map((item) => (
+              <ListItem key={item.id} disablePadding>
+                <ListItemButton onClick={() => scrollToSection(item.id)}>
                   <ListItemText
-                    primary={text}
+                    primary={item.label}
                     slotProps={{
                       primary: {
                         sx: {
@@ -89,13 +119,17 @@ export default function Navbar() {
             ))}
           </List>
         </Drawer>
-      </div>
+      </nav>
     );
   }
 
   return (
-    <div className={styles.navbar}>
-      <div className={styles.logo}>
+    <nav className={styles.navbar}>
+      <div 
+        className={styles.logo}
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        style={{ cursor: 'pointer' }}
+      >
         <Image
           className={styles.logoImg}
           src={logo}
@@ -103,19 +137,20 @@ export default function Navbar() {
         />
       </div>
       <ul className={styles.navItems}>
-        <li className={`${styles.navItem} btn-animate`}>
-          <a href="">O nama</a>
-        </li>
-        <li className={`${styles.navItem} btn-animate`}>
-          <a href="">Ponuda</a>
-        </li>
-        <li className={`${styles.navItem} btn-animate`}>
-          <a href="">Galerija</a>
-        </li>
-        <li className={`${styles.navItem} btn-animate`}>
-          <a href="">Kontakt</a>
-        </li>
+        {navItems.map((item) => (
+          <li key={item.id} className={`${styles.navItem} btn-animate`}>
+            <a 
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToSection(item.id);
+              }}
+              style={{ cursor: 'pointer' }}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
       </ul>
-    </div>
+    </nav>
   );
 }
