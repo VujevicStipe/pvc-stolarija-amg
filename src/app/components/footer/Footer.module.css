@@ -29,6 +29,16 @@
   max-width: 450px;
 }
 
+.footerContent p {
+  line-height: 1.7;
+  color: #555;
+}
+
+.footerContent strong {
+  color: var(--green);
+  font-weight: 600;
+}
+
 .contact {
   display: flex;
   flex-direction: column;
@@ -37,59 +47,145 @@
   gap: 10px;
 }
 
+.contactContent {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
 .contactContent h3 {
   display: flex;
   align-items: center;
   font-weight: 400;
   font-size: 1rem;
   gap: 8px;
+  margin: 0;
+}
+
+.contactLink {
+  color: inherit;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.contactLink:hover {
+  color: var(--green);
+  transform: translateX(3px);
+}
+
+.logoSection {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 20px;
 }
 
 .footerLogoImg {
   max-width: 200px;
   height: auto;
-  margin-bottom: 1.3rem;
+}
+
+.tagline {
+  text-align: left;
+  font-size: 0.95rem;
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
+  font-weight: 400;
 }
 
 .contactFormWrapper {
   flex: 1;
 }
+
 .marginBottom {
   margin-bottom: 9rem;
 }
 
-.allRights {
-  font-size: 0.8rem;
-  font-weight: 100;
-  display: flex;
-  flex-direction: column; 
-  align-items: center;    
-  text-align: center;
-  color: #555;
+.copyright {
   width: 100%;
   max-width: 1280px;
-  margin: 2rem auto 5px auto;
-  gap: 5px; 
+  text-align: center;
+  padding: 20px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
 }
 
-.allRights::before {
-  content: "";
-  width: 100%;
-  height: 1px;
-  background-color: #cccc;
+.allRights {
+  margin: 0 0 8px 0;
+  color: #555;
+  font-size: 0.9rem;
+  font-weight: 400;
 }
 
-/* Responsive
-@media (max-width: 1024px) {
-  .footerRow {
-    flex-direction: column;
+.seoText {
+  margin: 0;
+  color: #666;
+  font-size: 0.85rem;
+  font-weight: 300;
+}
+
+@media (max-width: 768px) {
+  .footerWrapper {
+    padding: 30px 20px;
   }
 
   .footerContent {
-    text-align: left;
+    text-align: center;
+  }
+
+  .footerContent p {
+    font-size: 0.95rem;
   }
 
   .contact {
-    align-items: flex-start;
+    align-items: center;
+    text-align: center;
   }
-} */
+
+  .logoSection {
+    align-items: center;
+  }
+
+  .tagline {
+    text-align: center;
+    font-size: 0.9rem;
+  }
+
+  .contactContent {
+    align-items: center;
+  }
+
+  .contactContent h3 {
+    font-size: 0.95rem;
+  }
+
+  .footerLogoImg {
+    max-width: 180px;
+  }
+
+  .copyright {
+    padding: 15px;
+  }
+
+  .seoText {
+    font-size: 0.8rem;
+    padding: 0 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .footerLogoImg {
+    max-width: 150px;
+  }
+
+  .contactContent h3 {
+    font-size: 0.9rem;
+  }
+
+  .allRights {
+    font-size: 0.85rem;
+  }
+}

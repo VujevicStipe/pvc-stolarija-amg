@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Footer.module.css";
 import Image from "next/image";
 import footerLogo from "../../../../public/image 3.png";
@@ -11,76 +11,130 @@ import ContactForm from "../contact-form/ContactForm";
 
 export default function Footer() {
   const deviceType = useDeviceType();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const isMobile = mounted && deviceType !== "desktop";
 
   return (
-    <div className={styles.footer}>
+    <footer className={styles.footer}>
       <div className={styles.footerWrapper}>
-        {deviceType === "desktop" ? (
+        {!isMobile ? (
           <div className={styles.footerRow}>
             <div className={styles.contact}>
               <div className={`${styles.footerContent} ${styles.marginBottom}`}>
-                <h2>Javi nam se!</h2>
+                <h2>Kontaktirajte nas!</h2>
                 <p>
-                  Lorem ipsum dolor sit amet, consec adipiscing elit. Donec eu
-                  tempus metus. Aliquam erat volutpat.
+                  Trebate nove prozore ili vrata? Pošaljite nam upit i dobijte 
+                  <strong> besplatno mjerenje i konzultacije</strong> za PVC stolariju 
+                  prilagođenu vašim potrebama.
                 </p>
               </div>
-              <Image
-                src={footerLogo}
-                alt="pvc stolarija amg logo proizvodnja montaža pvc stolarije"
-                className={styles.footerLogoImg}
-              />
+              <div className={styles.logoSection}>
+                <Image
+                  src={footerLogo}
+                  alt="AMG PVC Stolarija logo - proizvodnja i montaža prozora i vrata"
+                  className={styles.footerLogoImg}
+                />
+                <p className={styles.tagline}>
+                  Kvalitetna PVC stolarija<br />
+                  za vaš dom • Split i okolica
+                </p>
+              </div>
               <div className={styles.contactContent}>
                 <h3>
-                  <PhoneIcon /> <span>091/111-222</span>
+                  <PhoneIcon /> 
+                  <a href="tel:091111222" className={styles.contactLink}>
+                    091/111-222
+                  </a>
                 </h3>
                 <h3>
-                  <EmailIcon /> <span>pvc-stolarija-amg@gmail.com</span>
+                  <EmailIcon /> 
+                  <a href="mailto:amgpvcstolarija.bussines@gmail.com" className={styles.contactLink}>
+                    amgpvcstolarija.bussines@gmail.com
+                  </a>
                 </h3>
                 <h3>
-                  <FacebookIcon /> <span>PvcStolarijaAMG</span>
+                  <FacebookIcon /> 
+                  <a 
+                    href="https://www.facebook.com/p/Amg-Pvcstolarija-100084518001943/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className={styles.contactLink}
+                  >
+                    Amg Pvcstolarija
+                  </a>
                 </h3>
               </div>
             </div>
 
             <div className={styles.contactFormWrapper}>
-              <ContactForm />
+              <ContactForm inModal={false} />
             </div>
           </div>
         ) : (
           <>
             <div className={styles.footerContent}>
-              <h2>Javi nam se!</h2>
+              <h2>Kontaktirajte nas!</h2>
               <p>
-                Lorem ipsum dolor sit amet, consec adipiscing elit. Donec eu
-                tempus metus. Aliquam erat volutpat.
+                Trebate nove prozore ili vrata? Pošaljite nam upit i dobijte 
+                <strong> besplatno mjerenje i konzultacije</strong> za PVC stolariju 
+                prilagođenu vašim potrebama.
               </p>
             </div>
-            <ContactForm />
+            <ContactForm inModal={false} />
             <div className={styles.contact}>
-              <Image
-                src={footerLogo}
-                alt="pvc stolarija amg logo proizvodnja montaža pvc stolarije"
-                className={styles.footerLogoImg}
-              />
+              <div className={styles.logoSection}>
+                <Image
+                  src={footerLogo}
+                  alt="AMG PVC Stolarija logo - proizvodnja i montaža prozora i vrata"
+                  className={styles.footerLogoImg}
+                />
+                <p className={styles.tagline}>
+                  Kvalitetna PVC stolarija<br />
+                  za vaš dom • Split i okolica
+                </p>
+              </div>
               <div className={styles.contactContent}>
                 <h3>
-                  <PhoneIcon /> <span>091/111-222</span>
+                  <PhoneIcon /> 
+                  <a href="tel:091111222" className={styles.contactLink}>
+                    091/111-222
+                  </a>
                 </h3>
                 <h3>
-                  <EmailIcon /> <span>pvc-stolarija-amg@gmail.com</span>
+                  <EmailIcon /> 
+                  <a href="mailto:amgpvcstolarija.bussines@gmail.com" className={styles.contactLink}>
+                    amgpvcstolarija.bussines@gmail.com
+                  </a>
                 </h3>
                 <h3>
-                  <FacebookIcon /> <span>PvcStolarijaAMG</span>
+                  <FacebookIcon /> 
+                  <a 
+                    href="https://www.facebook.com/p/Amg-Pvcstolarija-100084518001943/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className={styles.contactLink}
+                  >
+                    Amg Pvcstolarija
+                  </a>
                 </h3>
               </div>
             </div>
           </>
         )}
       </div>
-      <h4 className={styles.allRights}>
-        © 2025 Pvc Stolarija AMG. Sva prava pridržana.
-      </h4>
-    </div>
+      <div className={styles.copyright}>
+        <p className={styles.allRights}>
+          © 2025 AMG PVC Stolarija. Sva prava pridržana.
+        </p>
+        <p className={styles.seoText}>
+          PVC prozori Split • PVC vrata • Roletne • Kaštela • Dalmacija
+        </p>
+      </div>
+    </footer>
   );
 }
