@@ -33,29 +33,46 @@
     background: white;
 }
 
-.googleMapsLocation {
-    width: 48%;
-}
-
 .aboutUsContent {
     width: 48%;
     min-width: 260px;
     text-align: start;
+    order: 1;
+}
+
+.googleMapsLocation {
+    width: 48%;
+    order: 2;
 }
 
 .contentTitle {
-    margin: 0 0 2rem 0;
-    font-size: 0.9rem;
-    font-weight: 100;
+    margin: 0 0 1.5rem 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    line-height: 1.4;
+}
+
+.contentText {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #333;
+    margin-bottom: 2rem;
+}
+
+.contentText strong {
+    color: var(--green);
+    font-weight: 600;
 }
 
 .location {
     font-size: 1rem;
-    font-weight: 100;
-    margin: 4rem 0;
+    font-weight: 400;
+    color: #666;
     display: inline-flex;
     align-items: center;
     gap: 10px;
+    font-style: normal;
 }
 
 .aboutSection.mobile,
@@ -63,11 +80,12 @@
     padding: 0 20px;
 }
 
+.aboutSection.mobile .aboutUsContent,
 .aboutSection.mobile .googleMapsLocation {
     width: 100%;
-    margin-bottom: 1.2rem;
+    order: unset;
 }
 
-.aboutSection.mobile .aboutUsContent {
-    width: 100%;
+.aboutSection.mobile .googleMapsLocation {
+    margin-top: 1.2rem;
 }
