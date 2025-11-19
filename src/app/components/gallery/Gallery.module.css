@@ -1,7 +1,6 @@
-/* Gallery Section */
+
 .gallerySection {
   width: 100%;
-  /* padding: 80px 20px; */
   background-color: #ffffff;
 }
 
@@ -10,7 +9,6 @@
   margin: 0 auto;
 }
 
-/* Header */
 .header {
   text-align: center;
   margin-bottom: 50px;
@@ -268,7 +266,6 @@
   }
 }
 
-/* Responsive - Mobile */
 @media (max-width: 768px) {
   .gallerySection {
     padding: 60px 15px;
@@ -332,7 +329,6 @@
   }
 }
 
-/* Responsive - Small Mobile */
 @media (max-width: 480px) {
   .title {
     font-size: 1.4rem;
