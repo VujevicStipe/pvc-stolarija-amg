@@ -20,7 +20,7 @@ export const buildMetadata = ({
   titleAbsolute 
 }: MetadataOptions): Metadata => {
   const fullUrl = `${meta.url}${path}`;
-  const ogImage = image?.src || '/meta/og-image.png'; 
+  const ogImage = image?.src || '/meta/og-image.jpg'; 
 
   return {
     title: titleAbsolute ? { absolute: titleAbsolute } : title,
