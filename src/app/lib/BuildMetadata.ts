@@ -114,7 +114,6 @@ export const getLocalizedJsonLd = async () => ({
       ],
       sameAs: [
         meta.company.social.facebook,
-        meta.company.social.instagram,
       ],
       aggregateRating: {
         '@type': 'AggregateRating',
