@@ -20,7 +20,7 @@ const AboutSection = () => {
       <div className={styles.aboutUsContent}>
         <h3 className={styles.contentTitle}>Vaš partner za kvalitetnu PVC stolariju u Splitu i okolici</h3>
         <p className={styles.contentText}>
-          AMG je obrt specijaliziran za <strong>proizvodnju i montažu PVC stolarije</strong> sa sjedištem u Kaštel Starijem. 
+          AMG je obrt specijaliziran za <strong>proizvodnju i montažu PVC stolarije</strong> sa sjedištem u Kaštel Starom. 
           Nudimo široku ponudu <strong>PVC prozora, vrata, balkonskih vrata i roletni</strong> uz profesionalnu montažu 
           i dugogodišnju garanciju. Naša PVC stolarija odlikuje se vrhunskom <strong>toplinskom i zvučnom izolacijom</strong>, 
           što garantira energetsku učinkovitost vašeg doma. S preko 1000 zadovoljnih klijenata u <strong>Splitu, 
