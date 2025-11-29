@@ -20,7 +20,7 @@ export const buildMetadata = ({
   titleAbsolute 
 }: MetadataOptions): Metadata => {
   const fullUrl = `${meta.url}${path}`;
-  const ogImage = image?.src || `${meta.url}/meta/og-image.png`;
+  const ogImage = image?.src || '/meta/og-image.png'; 
 
   return {
     title: titleAbsolute ? { absolute: titleAbsolute } : title,
@@ -35,7 +35,7 @@ export const buildMetadata = ({
       description,
       images: [
         {
-          url: ogImage,
+          url: ogImage, 
           alt: image?.alt || title,
           width: 1200,
           height: 630,
@@ -108,8 +108,8 @@ export const getLocalizedJsonLd = async () => ({
         {
           '@type': 'OpeningHoursSpecification',
           dayOfWeek: 'Saturday',
-          opens: '09:00',
-          closes: '13:00',
+          opens: '08:00',
+          closes: '12:00',
         },
       ],
       sameAs: [
