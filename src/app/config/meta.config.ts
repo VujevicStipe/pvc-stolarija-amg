@@ -1,5 +1,5 @@
 export const meta = {
-  url: 'https://pvc-stolarija-amg.hr',
+  url: 'https://pvc-stolarija-amg-zpf3.vercel.app/',
   title: 'AMG PVC Stolarija',
   name: 'AMG PVC Stolarija obrt',
   description: 'Proizvodnja i montaža PVC prozora, vrata, balkonskih vrata i roletni u Splitu i okolici. Vrhunska kvaliteta, brza montaža, dugogodišnja garancija.',
