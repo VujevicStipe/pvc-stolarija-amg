@@ -52,7 +52,7 @@ export const metadata = {
     description: meta.description,
     images: [
       {
-        url: '/meta/og-image.png', 
+        url: '/meta/og-image.jpg', 
         width: 1200,
         height: 630,
         alt: 'AMG PVC Stolarija - Proizvodnja prozora i vrata',
