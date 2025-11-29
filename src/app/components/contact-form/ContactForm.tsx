@@ -89,7 +89,7 @@ export default function ContactForm({ inModal = false }: ContactFormProps) {
       }}
     >
       <Typography
-        variant="h5"
+        variant="h4"
         sx={{
           fontWeight: 600,
           color: "var(--green)",
