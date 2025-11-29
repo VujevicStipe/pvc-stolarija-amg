@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Footer.module.css";
 import Image from "next/image";
-import footerLogo from "../../../../public/image 3.png";
+import footerLogo from "../../../../public/images/footer-logo.png";
 import PhoneIcon from "@mui/icons-material/Phone";
 import EmailIcon from "@mui/icons-material/Email";
 import FacebookIcon from "@mui/icons-material/Facebook";
@@ -47,14 +47,14 @@ export default function Footer() {
               <div className={styles.contactContent}>
                 <h3>
                   <PhoneIcon /> 
-                  <a href="tel:091111222" className={styles.contactLink}>
-                    091/111-222
+                  <a href="tel:0916009252" className={styles.contactLink}>
+                    091/600-9252
                   </a>
                 </h3>
                 <h3>
                   <EmailIcon /> 
-                  <a href="mailto:amgpvcstolarija.bussines@gmail.com" className={styles.contactLink}>
-                    amgpvcstolarija.bussines@gmail.com
+                  <a href="mailto:pvcstolarijaamg@gmail.com" className={styles.contactLink}>
+                    pvcstolarijaamg@gmail.com
                   </a>
                 </h3>
                 <h3>
@@ -101,14 +101,14 @@ export default function Footer() {
               <div className={styles.contactContent}>
                 <h3>
                   <PhoneIcon /> 
-                  <a href="tel:091111222" className={styles.contactLink}>
-                    091/111-222
+                  <a href="tel:0916009252" className={styles.contactLink}>
+                    091/600-9252
                   </a>
                 </h3>
                 <h3>
                   <EmailIcon /> 
-                  <a href="mailto:amgpvcstolarija.bussines@gmail.com" className={styles.contactLink}>
-                    amgpvcstolarija.bussines@gmail.com
+                  <a href="mailto:pvcstolarijaamg@gmail.com" className={styles.contactLink}>
+                    pvcstolarijaamg@gmail.com
                   </a>
                 </h3>
                 <h3>
