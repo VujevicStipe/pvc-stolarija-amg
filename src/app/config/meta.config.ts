@@ -25,7 +25,6 @@ export const meta = {
     },
     social: {
       facebook: 'https://www.facebook.com/p/Amg-Pvcstolarija-100084518001943/',
-      // instagram: 'https://www.instagram.com/amgpvc',
     },
     openingHours: {
       weekdays: 'Monday,Tuesday,Wednesday,Thursday,Friday 08:00-16:00',
