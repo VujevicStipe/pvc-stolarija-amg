@@ -11,7 +11,7 @@ export const metadata = buildMetadata({
   description: 'AMG - Vrhunska PVC stolarija u Splitu i Kaštelima. Proizvodnja i montaža PVC prozora, vrata, balkonskih vrata i roletni. Toplinska i zvučna izolacija, energetska učinkovitost. Besplatna mjerenja i konzultacije. Preko 1000 zadovoljnih klijenata.',
   path: '/',
   image: {
-    src: '/meta/og-home.png',
+    src: '/meta/og-image.png',
     alt: 'AMG PVC Stolarija - Proizvodnja i montaža prozora i vrata u Splitu',
   },
 });
