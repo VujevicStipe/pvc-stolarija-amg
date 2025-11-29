@@ -3,10 +3,10 @@
 import React, { useState, useEffect } from "react";
 import styles from "./HeroSection.module.css";
 import Image from "next/image";
-import logo from "../../../../public/logo.svg";
 import { Button } from "@mui/material";
-import heroImg1 from "../../../../public/heroImg1.png";
-import heroImg2 from "../../../../public/heroImg2.png";
+import logo from "../../../../public/logo.svg";
+import heroImg1 from "../../../../public/images/hero-prozori.png";
+import heroImg2 from "../../../../public/images/hero-vrata.png";
 import useDeviceType from "@/app/hooks/useWindowSize";
 import ContactModal from "@/app/components/contact-modal/ContactModal";
 
