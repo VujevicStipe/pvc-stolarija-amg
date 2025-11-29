@@ -3,7 +3,6 @@ import React from "react";
 import { Dialog, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import ContactForm from "../contact-form/ContactForm";
-import styles from "./ContactModal.module.css";
 
 interface ContactModalProps {
   open: boolean;
