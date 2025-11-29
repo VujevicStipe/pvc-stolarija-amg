@@ -15,55 +15,55 @@ interface GalleryImage {
 const galleryImages: GalleryImage[] = [
   {
     id: 1,
-    src: '/images/door1.jpg',
+    src: '/images/slider1.jpg',
     alt: 'PVC vrata i prozori 1',
     gridArea: 'img1'
   },
   {
     id: 2,
-    src: '/images/window1.jpg', 
+    src: '/images/slider9.jpg', 
     alt: 'PVC vrata i prozori 2',
     gridArea: 'img2'
   },
   {
     id: 3,
-    src: '/images/shutter1.jpg', 
+    src: '/images/slider3.jpg', 
     alt: 'PVC vrata i prozori 3',
     gridArea: 'img3'
   },
   {
     id: 4,
-    src: '/images/window1.jpg', 
+    src: '/images/slider4.jpg', 
     alt: 'PVC vrata i prozori 4',
     gridArea: 'img4'
   },
   {
     id: 5,
-    src: '/images/door1.jpg', 
+    src: '/images/slider5.jpg', 
     alt: 'PVC vrata i prozori 5',
     gridArea: 'img5'
   },
   {
     id: 6,
-    src: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=600&h=600&fit=crop',
+    src: '/images/slider6.jpg',
     alt: 'PVC vrata i prozori 6',
     gridArea: 'img6'
   },
   {
     id: 7,
-    src: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop',
+    src: '/images/slider7.jpg',
     alt: 'PVC vrata i prozori 7',
     gridArea: 'img7'
   },
   {
     id: 8,
-    src: 'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=600&h=600&fit=crop',
+    src: '/images/slider8.jpg',
     alt: 'PVC vrata i prozori 8',
     gridArea: 'img8'
   },
   {
     id: 9,
-    src: 'https://images.unsplash.com/photo-1484154218962-a197022b5858?w=600&h=800&fit=crop',
+    src: '/images/slider2.jpg',
     alt: 'PVC vrata i prozori 9',
     gridArea: 'img9'
   }
@@ -85,7 +85,6 @@ const Gallery = () => {
     setCurrentImageIndex(index);
     setIsModalOpen(true);
     
-    // POPRAVLJENO: Spriječi layout shift
     const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
     document.body.style.overflow = 'hidden';
     document.body.style.paddingRight = `${scrollbarWidth}px`;
@@ -94,7 +93,6 @@ const Gallery = () => {
   const closeModal = () => {
     setIsModalOpen(false);
     
-    // POPRAVLJENO: Vrati sve na normalno
     document.body.style.overflow = '';
     document.body.style.paddingRight = '';
   };
@@ -111,7 +109,6 @@ const Gallery = () => {
     );
   };
 
-  // Keyboard navigation
   useEffect(() => {
     if (!isModalOpen) return;
     
@@ -125,7 +122,6 @@ const Gallery = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isModalOpen]);
 
-  // Cleanup kada se komponenta unmountuje
   useEffect(() => {
     return () => {
       document.body.style.overflow = '';
@@ -147,7 +143,6 @@ const Gallery = () => {
           </button>
         </div>
 
-        {/* Grid Gallery */}
         <div className={styles.gallery}>
           {displayImages.map((image, index) => (
             <div
@@ -168,7 +163,6 @@ const Gallery = () => {
           ))}
         </div>
 
-        {/* Show More Button - Samo na mobile */}
         {isMobile && galleryImages.length > mobileImageCount && (
           <div className={styles.showMoreContainer}>
             <button 
@@ -181,7 +175,6 @@ const Gallery = () => {
         )}
       </div>
 
-      {/* Lightbox Modal */}
       {isModalOpen && (
         <div className={styles.modal} onClick={closeModal}>
           <button 
