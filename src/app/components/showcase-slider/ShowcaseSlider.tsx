@@ -16,30 +16,58 @@ interface SlideData {
 const slidesData: SlideData[] = [
   {
     id: 1,
-    title: 'Ulazna vrata',
+    title: 'Grilje',
     subtitle: 'Ponuda',
-    image: 'https://images.unsplash.com/photo-1563298723-dcfebaa392e3?w=600&h=700&fit=crop',
-    features: ['Premium kvaliteta', 'Toplinska izolacija', 'Sigurnosna brava', 'Moderna estetika']
+    image: './images/grilje.jpg',
+    features: ['Veliki izbor boja po želji kupca', 'Otporna na vremenske uvjete', 'Elegantni i moderni profili', 'UV zaštita i brza montaža']
   },
   {
     id: 2,
-    title: 'PVC Prozori',
+    title: 'Ulazna PVC vrata',
     subtitle: 'Ponuda',
-    image: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?w=600&h=700&fit=crop',
-    features: ['Energetska učinkovitost', 'Zvučna izolacija', 'Lako održavanje']
+    image: './images/vrata.jpg',
+    features: ['Premium kvaliteta izrade', 'Moderan dizajn i širok izbor panela', 'Toplinska izolacija', 'Sigurnosna brava']
   },
   {
     id: 3,
-    title: 'Komarnici',
+    title: 'PVC Prozori',
     subtitle: 'Ponuda',
-    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&h=700&fit=crop',
-    features: ['Jednostavna montaža', 'Različiti modeli', 'Dugotrajnost']
+    image: './images/pvc_prozor.jpg',
+    features: ['Energetska učinkovitost', 'Zvučna izolacija i UV zaštita', 'Odabir boja i završnih obrada po želji', 'Lako održavanje']
   },
   {
     id: 4,
+    title: 'Rolete',
+    subtitle: 'Ponuda',
+    image: './images/rolete.jpg',
+    features: ['Veliki izbor dizajna i boja', 'Otporna na vremenske uvjete', 'Elegantni profili', 'UV zaštita']
+  },
+  {
+    id: 5,
+    title: 'Rolete na izbačaj',
+    subtitle: 'Ponuda',
+    image: './images/roleta_izbacaj.jpg',
+    features: ['Širok izbor modela i boja', 'Izvedba prema specifičnim potrebama kupca', 'Otporna na vremenske uvjete', 'Elegantni profili i UV zaštita']
+  },
+  {
+    id: 6,
     title: 'Balkonska vrata',
     subtitle: 'Ponuda',
-    image: 'https://images.unsplash.com/photo-1484154218962-a197022b5858?w=600&h=700&fit=crop',
+    image: './images/balkonska_vrata.jpg',
+    features: ['Veliki izbor dizajna i boja', 'Otporna na vremenske uvjete', 'Elegantni profili', 'UV zaštita']
+  },
+  {
+    id: 7,
+    title: 'Komarnici',
+    subtitle: 'Ponuda',
+    image: './images/komarnik.jpg',
+    features: ['Jednostavna i brza montaža', 'Veliki izbor modela (fiksni, rolo, klizni…)', 'Dugotrajni materijali', 'Boje po dogovoru']
+  },
+  {
+    id: 8,
+    title: 'Klizna stijenka',
+    subtitle: 'Ponuda',
+    image: './images/klizna_vrata.jpg',
     features: ['Veliki izbor dizajna', 'Otporna na vremenske uvjete', 'Elegantni profili', 'UV zaštita']
   }
 ];
@@ -56,7 +84,7 @@ const ShowCaseSlider = () => {
     if (isAutoPlaying) {
       autoPlayRef.current = setInterval(() => {
         handleNext();
-      }, 4000);
+      }, 5000);
     }
     return () => {
       if (autoPlayRef.current) clearInterval(autoPlayRef.current);
