@@ -22,6 +22,10 @@ export const metadata = {
   authors: [{ name: meta.author }],
   creator: meta.author,
   publisher: meta.name,
+  icons: {
+    icon: '/icon.png',
+    apple: '/apple-icon.png',
+  },
   robots: {
     index: true,
     follow: true,
@@ -48,7 +52,7 @@ export const metadata = {
     description: meta.description,
     images: [
       {
-        url: `${meta.url}/meta/og-image.png`,
+        url: '/meta/og-image.png', 
         width: 1200,
         height: 630,
         alt: 'AMG PVC Stolarija - Proizvodnja prozora i vrata',
@@ -59,7 +63,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: meta.title,
     description: meta.description,
-    images: [`${meta.url}/meta/og-image.png`],
+    images: ['/meta/og-image.png'], 
   },
 };
 
