@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Navbar.module.css";
 import Image from "next/image";
-import logo from "../../../../public/image 3.png";
+import logo from "../../../../public/images/navbar-logo.png";
 import useDeviceType from "@/app/hooks/useWindowSize";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
