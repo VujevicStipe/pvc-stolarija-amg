@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import styles from './Gallery.module.css';
 import useDeviceType from '@/app/hooks/useWindowSize';
@@ -76,6 +76,11 @@ const Gallery = () => {
   const deviceType = useDeviceType();
   const isMobile = deviceType === 'mobile';
 
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const modalContentRef = useRef<HTMLDivElement>(null);
+
   const mobileImageCount = 2;
   const displayImages = isMobile 
     ? galleryImages.slice(0, mobileImageCount) 
@@ -109,6 +114,63 @@ const Gallery = () => {
     );
   };
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStart(e.targetTouches[0].clientX);
+    setIsDragging(true);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!isDragging) return;
+    
+    const swipeThreshold = 50; 
+    const distance = touchStart - touchEnd;
+    
+    if (Math.abs(distance) > swipeThreshold) {
+      if (distance > 0) {
+        goToNext();
+      } else {
+        goToPrevious();
+      }
+    }
+    
+    setIsDragging(false);
+    setTouchStart(0);
+    setTouchEnd(0);
+  };
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    setTouchStart(e.clientX);
+    setIsDragging(true);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging) return;
+    setTouchEnd(e.clientX);
+  };
+
+  const handleMouseUp = () => {
+    if (!isDragging) return;
+    
+    const swipeThreshold = 50;
+    const distance = touchStart - touchEnd;
+    
+    if (Math.abs(distance) > swipeThreshold) {
+      if (distance > 0) {
+        goToNext();
+      } else {
+        goToPrevious();
+      }
+    }
+    
+    setIsDragging(false);
+    setTouchStart(0);
+    setTouchEnd(0);
+  };
+
   useEffect(() => {
     if (!isModalOpen) return;
     
@@ -132,7 +194,6 @@ const Gallery = () => {
   return (
     <section className={styles.gallerySection}>
       <div className={styles.container}>
-        {/* Header */}
         <div className={styles.header}>
           <h2 className={styles.title}>Naša PVC stolarija u praksi</h2>
           <button 
@@ -197,13 +258,22 @@ const Gallery = () => {
           </button>
 
           <div 
-            className={styles.modalContent}
+            ref={modalContentRef}
+            className={`${styles.modalContent} ${isDragging ? styles.dragging : ''}`}
             onClick={(e) => e.stopPropagation()}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUp}
+            onMouseLeave={handleMouseUp}
           >
             <img
               src={galleryImages[currentImageIndex].src}
               alt={galleryImages[currentImageIndex].alt}
               className={styles.modalImage}
+              draggable={false}
             />
             <div className={styles.imageCounter}>
               {currentImageIndex + 1} / {galleryImages.length}
