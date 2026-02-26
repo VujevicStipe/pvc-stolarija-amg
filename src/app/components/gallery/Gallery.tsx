@@ -9,64 +9,20 @@ interface GalleryImage {
   id: number;
   src: string;
   alt: string;
+  title: string;
   gridArea: string;
 }
 
 const galleryImages: GalleryImage[] = [
-  {
-    id: 1,
-    src: '/images/slider1.jpg',
-    alt: 'PVC vrata i prozori 1',
-    gridArea: 'img1'
-  },
-  {
-    id: 2,
-    src: '/images/slider9.jpg', 
-    alt: 'PVC vrata i prozori 2',
-    gridArea: 'img2'
-  },
-  {
-    id: 3,
-    src: '/images/slider3.jpg', 
-    alt: 'PVC vrata i prozori 3',
-    gridArea: 'img3'
-  },
-  {
-    id: 4,
-    src: '/images/slider4.jpg', 
-    alt: 'PVC vrata i prozori 4',
-    gridArea: 'img4'
-  },
-  {
-    id: 5,
-    src: '/images/slider5.jpg', 
-    alt: 'PVC vrata i prozori 5',
-    gridArea: 'img5'
-  },
-  {
-    id: 6,
-    src: '/images/slider6.jpg',
-    alt: 'PVC vrata i prozori 6',
-    gridArea: 'img6'
-  },
-  {
-    id: 7,
-    src: '/images/slider7.jpg',
-    alt: 'PVC vrata i prozori 7',
-    gridArea: 'img7'
-  },
-  {
-    id: 8,
-    src: '/images/slider8.jpg',
-    alt: 'PVC vrata i prozori 8',
-    gridArea: 'img8'
-  },
-  {
-    id: 9,
-    src: '/images/slider2.jpg',
-    alt: 'PVC vrata i prozori 9',
-    gridArea: 'img9'
-  }
+  { id: 1, src: '/images/slider1.jpg', alt: 'PVC vrata - ugradnja u stambeni objekt', title: 'PVC vrata balkon - AMG stolarija', gridArea: 'img1' },
+  { id: 2, src: '/images/slider9.jpg', alt: 'PVC prozori - izrada i montaža', title: 'PVC prozori izrada montaža - AMG stolarija', gridArea: 'img2' },
+  { id: 3, src: '/images/slider3.jpg', alt: 'PVC ulazna vrata - moderna izrada', title: 'PVC ulazna vrata - AMG stolarija', gridArea: 'img3' },
+  { id: 4, src: '/images/slider4.jpg', alt: 'PVC balkonska vrata - ugradnja i montaža', title: 'PVC balkon vrata - AMG stolarija', gridArea: 'img4' },
+  { id: 5, src: '/images/slider5.jpg', alt: 'PVC prozori s toplinskom izolacijom', title: 'PVC prozori toplinska izolacija - AMG', gridArea: 'img5' },
+  { id: 6, src: '/images/slider6.jpg', alt: 'PVC stolarija - gotovi radovi', title: 'PVC stolarija gotovi radovi - AMG', gridArea: 'img6' },
+  { id: 7, src: '/images/slider7.jpg', alt: 'PVC vrata balkon - detalj izrade', title: 'PVC balkonskih vrata - AMG stolarija', gridArea: 'img7' },
+  { id: 8, src: '/images/slider8.jpg', alt: 'PVC prozori - detalj ugradnje', title: 'PVC prozori pod kutem ugradnja - AMG stolarija', gridArea: 'img8' },
+  { id: 9, src: '/images/slider2.jpg', alt: 'PVC stolarija - završeni projekt', title: 'PVC stolarija projekt - AMG', gridArea: 'img9' },
 ];
 
 const Gallery = () => {
@@ -215,6 +171,7 @@ const Gallery = () => {
               <img 
                 src={image.src} 
                 alt={image.alt}
+                title={image.title}
                 className={styles.galleryImage}
               />
               <div className={styles.overlay}>
@@ -272,6 +229,7 @@ const Gallery = () => {
             <img
               src={galleryImages[currentImageIndex].src}
               alt={galleryImages[currentImageIndex].alt}
+              title={galleryImages[currentImageIndex].title}
               className={styles.modalImage}
               draggable={false}
             />

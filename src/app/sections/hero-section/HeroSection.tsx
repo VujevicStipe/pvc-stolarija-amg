@@ -39,7 +39,8 @@ const HeroSection = () => {
             <Image
               src={logo}
               className={styles.logoImg}
-              alt="amg-pvc-stolarija-logo-obrt-za-proizvodnju"
+              alt="amg pvc stolarija logo obrt za proizvodnju"
+              title="logo amg pvc stolarija obrt za proizvodnju"
               priority
             />
           </div>
@@ -47,7 +48,7 @@ const HeroSection = () => {
             Proizvodnja i Montaža <span className={styles.highlight}>PVC stolarije</span> AMG
           </h1>
           <p className={styles.heroSubtitle}>
-            Vrhunska kvaliteta prozora i vrata za vaš dom • Split i okolica
+            Izrada prozora, vrata, roleta, komarnika u okolici Splita. Pronađite nas u Kaštel Starome.
           </p>
           <Button
             variant="contained"
@@ -78,7 +79,8 @@ const HeroSection = () => {
             <Image
               src={heroImg1}
               className={styles.heroImg}
-              alt="amg-pvc-stolarija-prozori-izgled-proizvodnja-montaža-montaza"
+              alt="amg pvc stolarija prozori izgled proizvodnja montaža montaza"
+              title="izrada prozora izgled kuće pvc montaže"
               priority
             />
             <div className={styles.imageOverlay}></div>
@@ -87,7 +89,8 @@ const HeroSection = () => {
             <Image
               src={heroImg2}
               className={styles.heroImg}
-              alt="amg-pvc-stolarija-vrata-izgled-proizvodnja-montaža-montaza"
+              alt="amg pvc stolarija vrata izgled proizvodnja montaža montaza"
+              title="izgled montaže pvc stolarije prozora"
               priority
             />
             <div className={styles.imageOverlay}></div>

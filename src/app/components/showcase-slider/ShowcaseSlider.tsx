@@ -11,6 +11,8 @@ interface SlideData {
   subtitle: string;
   image: string;
   features: string[];
+  imgAlt: string;
+  imgTitle: string;
 }
 
 const slidesData: SlideData[] = [
@@ -19,6 +21,8 @@ const slidesData: SlideData[] = [
     title: 'Grilje',
     subtitle: 'Ponuda',
     image: './images/grilje.jpg',
+    imgAlt: 'PVC grilje - izrada i montaža',
+    imgTitle: 'PVC grilje AMG stolarija',
     features: ['Veliki izbor boja po želji kupca', 'Otporna na vremenske uvjete', 'Elegantni i moderni profili', 'UV zaštita i brza montaža']
   },
   {
@@ -26,6 +30,8 @@ const slidesData: SlideData[] = [
     title: 'Ulazna PVC vrata',
     subtitle: 'Ponuda',
     image: './images/vrata.jpg',
+    imgAlt: 'PVC ulazna vrata - izrada i montaža',
+    imgTitle: 'PVC ulazna vrata AMG stolarija',
     features: ['Premium kvaliteta izrade', 'Moderan dizajn i širok izbor panela', 'Toplinska izolacija', 'Sigurnosna brava']
   },
   {
@@ -33,6 +39,8 @@ const slidesData: SlideData[] = [
     title: 'PVC Prozori',
     subtitle: 'Ponuda',
     image: './images/pvc_prozor.jpg',
+    imgAlt: 'PVC prozori - izrada i montaža',
+    imgTitle: 'PVC prozori AMG stolarija',
     features: ['Energetska učinkovitost', 'Zvučna izolacija i UV zaštita', 'Odabir boja i završnih obrada po želji', 'Lako održavanje']
   },
   {
@@ -40,6 +48,8 @@ const slidesData: SlideData[] = [
     title: 'Rolete',
     subtitle: 'Ponuda',
     image: './images/rolete.jpg',
+    imgAlt: 'PVC rolete - izrada i montaža',
+    imgTitle: 'PVC rolete AMG stolarija',
     features: ['Veliki izbor dizajna i boja', 'Otporna na vremenske uvjete', 'Elegantni profili', 'UV zaštita']
   },
   {
@@ -47,6 +57,8 @@ const slidesData: SlideData[] = [
     title: 'Rolete na izbačaj',
     subtitle: 'Ponuda',
     image: './images/roleta_izbacaj.jpg',
+    imgAlt: 'PVC rolete na izbačaj - izrada i montaža',
+    imgTitle: 'PVC rolete na izbačaj AMG stolarija',
     features: ['Širok izbor modela i boja', 'Izvedba prema specifičnim potrebama kupca', 'Otporna na vremenske uvjete', 'Elegantni profili i UV zaštita']
   },
   {
@@ -54,6 +66,8 @@ const slidesData: SlideData[] = [
     title: 'Balkonska vrata',
     subtitle: 'Ponuda',
     image: './images/balkonska_vrata.jpg',
+    imgAlt: 'PVC balkonska vrata - izrada i montaža',
+    imgTitle: 'PVC balkonska vrata AMG stolarija',
     features: ['Veliki izbor dizajna i boja', 'Otporna na vremenske uvjete', 'Elegantni profili', 'UV zaštita']
   },
   {
@@ -61,6 +75,8 @@ const slidesData: SlideData[] = [
     title: 'Komarnici',
     subtitle: 'Ponuda',
     image: './images/komarnik.jpg',
+    imgAlt: 'Komarnici - izrada i montaža',
+    imgTitle: 'Komarnici AMG stolarija',
     features: ['Jednostavna i brza montaža', 'Veliki izbor modela (fiksni, rolo, klizni…)', 'Dugotrajni materijali', 'Boje po dogovoru']
   },
   {
@@ -68,6 +84,8 @@ const slidesData: SlideData[] = [
     title: 'Klizna stijenka',
     subtitle: 'Ponuda',
     image: './images/klizna_vrata.jpg',
+    imgAlt: 'Klizna stijenka - izrada i montaža',
+    imgTitle: 'Klizna stijenka AMG stolarija',
     features: ['Veliki izbor dizajna', 'Otporna na vremenske uvjete', 'Elegantni profili', 'UV zaštita']
   }
 ];
@@ -173,7 +191,8 @@ const ShowCaseSlider = () => {
                   >
                     <img 
                       src={slide.image} 
-                      alt={slide.title} 
+                      alt={slide.imgAlt} 
+                      title={slide.imgTitle}
                       className={styles.slideImage} 
                     />
                   </div>
