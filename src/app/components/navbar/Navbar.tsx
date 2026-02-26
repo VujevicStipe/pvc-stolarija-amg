@@ -55,7 +55,8 @@ export default function Navbar() {
           <Image
             className={styles.logoImg}
             src={logo}
-            alt="amg-pvc-stolarija-logo-obrt-za-proizvodnju"
+            alt="amg pvc stolarija logo obrt za proizvodnju"
+            title="logo amg pvc stolarija obrt za proizvodnju"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             style={{ cursor: 'pointer' }}
           />

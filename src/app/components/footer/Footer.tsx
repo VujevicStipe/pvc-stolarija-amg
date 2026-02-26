@@ -37,6 +37,7 @@ export default function Footer() {
                 <Image
                   src={footerLogo}
                   alt="AMG PVC Stolarija logo - proizvodnja i montaža prozora i vrata"
+                  title="logo amg pvc stolarija proizvodnja i montaža prozora i vrata"
                   className={styles.footerLogoImg}
                 />
                 <p className={styles.tagline}>
