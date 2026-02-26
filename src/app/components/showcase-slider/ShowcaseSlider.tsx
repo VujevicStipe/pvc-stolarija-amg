@@ -128,23 +128,14 @@ const ShowCaseSlider = () => {
     setIsAutoPlaying(true);
   };
 
-  const getVisibleSlides = () => {
-    const total = slidesData.length;
-    const slides = [];
-    
-    for (let i = -1; i <= 2; i++) {
-      const index = (activeIndex + i + total) % total;
-      slides.push({
-        ...slidesData[index],
-        position: i,
-        originalIndex: index
-      });
-    }
-    
-    return slides;
-  };
+  const total = slidesData.length;
 
-  const visibleSlides = getVisibleSlides();
+  const getPosition = (index: number) => {
+    let pos = index - activeIndex;
+    if (pos > total / 2) pos -= total;
+    if (pos < -total / 2) pos += total;
+    return pos;
+  };
 
   return (
     <div className={styles.container}>
@@ -177,14 +168,15 @@ const ShowCaseSlider = () => {
 
           <div className={styles.sliderSection}>
             <div className={styles.sliderWrapper}>
-              {visibleSlides.map((slide) => {
-                const isActive = slide.position === 0;
-                const isLeft = slide.position < 0;
-                const isVisible = slide.position >= 0 && slide.position <= 2;
+              {slidesData.map((slide, index) => {
+                const pos = getPosition(index);
+                const isActive = pos === 0;
+                const isLeft = pos < 0;
+                const isVisible = pos >= 0 && pos <= 2;
 
-                const transformValue = isMobile 
-                  ? `translateX(${slide.position * 200}px) scale(${isActive ? 1.3 : 1})`
-                  : `translateX(${slide.position * 280}px) scale(${isActive ? 1.3 : 1})`;
+                const transformValue = isMobile
+                  ? `translateX(${pos * 200}px) scale(${isActive ? 1.3 : 1})`
+                  : `translateX(${pos * 280}px) scale(${isActive ? 1.3 : 1})`;
 
                 return (
                   <div
@@ -192,18 +184,17 @@ const ShowCaseSlider = () => {
                     className={`${styles.slide} ${isActive ? styles.slideActive : ''} ${isLeft ? styles.slideLeft : ''}`}
                     style={{
                       transform: transformValue,
-                      zIndex: isActive ? 10 : isLeft ? -1 : 8 - slide.position,
-                      opacity: isVisible ? 1 : 0,
+                      zIndex: isActive ? 10 : isLeft ? -1 : 8 - pos,
+                      opacity: isLeft ? 0 : isVisible ? 1 : 0,
                       pointerEvents: isVisible ? 'auto' : 'none',
-                      visibility: isVisible ? 'visible' : 'hidden',
                     }}
-                    onClick={() => !isActive && isVisible && setActiveIndex(slide.originalIndex)}
+                    onClick={() => !isActive && isVisible && setActiveIndex(index)}
                   >
-                    <img 
-                      src={slide.image} 
-                      alt={slide.imgAlt} 
+                    <img
+                      src={slide.image}
+                      alt={slide.imgAlt}
                       title={slide.imgTitle}
-                      className={styles.slideImage} 
+                      className={styles.slideImage}
                     />
                   </div>
                 );
