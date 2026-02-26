@@ -2,7 +2,7 @@ export const meta = {
   url: 'https://pvc-stolarija-amg.hr',
   title: 'Izrada prozora, vrata i roleta | PVC Stolarija AMG',
   name: 'AMG PVC Stolarija obrt',
-  description: 'PVC prozori, vrata i rolete u Splitu i Kaštelima. Izrada, montaža i vrhunska izolacija.',
+  description: 'PVC prozori, vrata, rolete i komarnici u Splitu i Kaštelima. Izrada, montaža, besplatna mjerenja i vrhunska toplinska izolacija.',
   keywords: 'PVC stolarija Split, PVC prozori Split, PVC vrata Split, PVC stolarija Kaštela, PVC prozori Dalmacija, klizne stijenke, komarnici, komarice, PVC rolete, montaža PVC stolarije, izrada prozora, kaštel stari',
   author: 'AMG PVC Stolarija',
   company: {
