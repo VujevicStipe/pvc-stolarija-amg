@@ -1,36 +1,31 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AMG PVC Stolarija
 
-## Getting Started
+Client website for AMG PVC Stolarija, a PVC joinery manufacturing and installation company based in Kaštel Stari, Croatia.
 
-First, run the development server:
+🌐 [pvc-stolarija-amg.hr](https://pvc-stolarija-amg.hr)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+![Preview](./public/images/amgpvc_mockup.png)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Contact Form** — server-side email integration via Resend API
+- **SEO Optimisation** — JSON-LD structured data, sitemap, Google Search Console
+- **GSAP Animations** — scroll-triggered animations
+- **Responsive Design** — mobile and desktop support
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## Tech Stack
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Frontend:** Next.js 15, TypeScript, CSS Modules
+- **Animations:** GSAP
+- **Email:** Resend API
+- **Hosting:** Vercel
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Proprietary — AMG PVC Stolarija d.o.o.
