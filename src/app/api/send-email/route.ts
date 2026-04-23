@@ -4,6 +4,14 @@ import { NextRequest, NextResponse } from 'next/server';
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: NextRequest) {
+
+  if (process.env.CONTACT_FORM_CLOSED === "true") {
+    return NextResponse.json(
+      { error: "Trenutno ne primamo upite. Obrt je privremeno zatvoren." },
+      { status: 503 }
+    );
+  }
+
   try {
     const body = await request.json();
     const { ime, prezime, email, telefon, poruka } = body;

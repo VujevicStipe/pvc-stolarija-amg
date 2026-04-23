@@ -4,6 +4,7 @@ import Navbar from "./components/navbar/Navbar";
 import Footer from "./components/footer/Footer";
 import { getLocalizedJsonLd } from '../app/lib/BuildMetadata';
 import { meta } from '../app/config/meta.config';
+import ClosedModal from "./components/closed-modal/closed-modal";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -86,6 +87,7 @@ export default async function RootLayout({
         <header>
           <Navbar />
         </header>
+        <ClosedModal />
         {children}
         <Footer />
       </body>
